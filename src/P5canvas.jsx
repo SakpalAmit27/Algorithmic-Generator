@@ -9,11 +9,23 @@ const P5canvas = () => {
   useEffect(()  => {
 
     const sketch = (p) => {
+      // setting up the canvas // 
       p.setup = () => {
         p.createCanvas(600,600).parent(canvasRef.current);
+      }; 
+
+
+      // draw function , allows to draw unto the canvas // 
+
+      p.draw = () => {
+        p.background(330);
       }
-    }
-    
+    };
+
+
+    // storing the completed sketch and sketch setup so far // 
+    const myP5 = new p5(sketch,canvasRef.current);
+
   },[])
 
   return (
