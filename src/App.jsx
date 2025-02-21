@@ -1,8 +1,10 @@
 
 const App = () => {
   return (
-    <div>
-      Algorithmic Gen
+    <div className="container">
+      <div className="head">
+         Algorithmic Dynamics
+      </div>
     </div>
   )
 }
