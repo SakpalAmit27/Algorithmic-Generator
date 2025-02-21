@@ -1,3 +1,4 @@
+import P5canvas from "./P5canvas"
 
 const App = () => {
   return (
@@ -5,6 +6,8 @@ const App = () => {
       <div className="head">
          Algorithmic Dynamics
       </div>
+
+      <P5canvas/>
     </div>
   )
 }

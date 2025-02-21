@@ -1,38 +1,33 @@
-import React, { useEffect, useRef } from 'react'
-import p5 from 'p5'
+import { useEffect, useRef } from "react";
+import p5 from "p5";
 
-// this consist of the canvas , that the code will run in (window)
+// This consists of the canvas where the code will run
 const P5canvas = () => {
-
   const canvasRef = useRef(null);
 
-  useEffect(()  => {
-
+  useEffect(() => {
     const sketch = (p) => {
-      // setting up the canvas // 
       p.setup = () => {
-        p.createCanvas(600,600).parent(canvasRef.current);
-      }; 
-
-
-      // draw function , allows to draw unto the canvas // 
+        p.createCanvas(600, 600).parent(canvasRef.current);
+      };
 
       p.draw = () => {
-        p.background(330);
-      }
+        p.background(200); // Change from 330 to 200 (valid grayscale)
+      };
     };
 
+    const myP5 = new p5(sketch, canvasRef.current);
 
-    // storing the completed sketch and sketch setup so far // 
-    const myP5 = new p5(sketch,canvasRef.current);
-
-  },[])
+    return () => {
+      myP5.remove();
+    };
+  }, []);
 
   return (
-    <div>
-
+    <div style={{ width: "600px", height: "600px", border: "1px solid black" }}>
+      <div ref={canvasRef}></div>
     </div>
-  )
-}
+  );
+};
 
-export default P5canvas
+export default P5canvas;
