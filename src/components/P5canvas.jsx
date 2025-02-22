@@ -19,7 +19,7 @@ const P5canvas = () => {
 
       p.mousePressed = () => {
         playRandomNote(); // called the function from the tone
-        setPlayedNotes(playRandomNote()) ;
+        setPlayedNotes(getPlayedNotes()) ;
       };
     };
 
@@ -34,6 +34,7 @@ const P5canvas = () => {
     <div style={{ width: "600px", height: "600px", border: "1px solid black" }}>
       <div ref={canvasRef}></div>
       <h3>played notes</h3>
+      <p>{playedNotes.join(", ")}</p>
     </div>
   );
 };
