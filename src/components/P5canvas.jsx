@@ -1,5 +1,6 @@
 import { useEffect, useRef } from "react";
 import p5 from "p5";
+import * as Tone from 'tone'
 
 // This consists of the canvas where the code will run
 const P5canvas = () => {
@@ -7,9 +8,20 @@ const P5canvas = () => {
 
   useEffect(() => {
     const sketch = (p) => {
+
+      // creating synth for playing notes // 
+
+      let synth;
+
       p.setup = () => {
         p.createCanvas(600, 600).parent(canvasRef.current);
       };
+
+      // creating while intializer // 
+
+      synth = new Tone.Synth().toDestination();
+
+      
 
       p.draw = () => {
         p.fill(255, 0, 0);
@@ -17,10 +29,6 @@ const P5canvas = () => {
         // p.background(100)
       };
 
-
-      p.mousePressed = () => {
-        playNote();
-      }
     };
 
     const myP5 = new p5(sketch, canvasRef.current);
