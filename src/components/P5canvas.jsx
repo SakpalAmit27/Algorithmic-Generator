@@ -12,8 +12,15 @@ const P5canvas = () => {
       };
 
       p.draw = () => {
-        p.background(200); // Change from 330 to 200 (valid grayscale)
+        p.fill(255, 0, 0);
+        p.ellipse(p.width / 2, p.height / 2, 50, 50);
+        // p.background(100)
       };
+
+
+      p.mousePressed = () => {
+        playNote();
+      }
     };
 
     const myP5 = new p5(sketch, canvasRef.current);

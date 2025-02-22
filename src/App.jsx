@@ -1,4 +1,4 @@
-import P5canvas from "./P5canvas"
+import P5canvas from "./components/P5canvas"
 
 const App = () => {
   return (
