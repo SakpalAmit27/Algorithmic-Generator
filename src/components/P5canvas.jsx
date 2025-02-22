@@ -1,39 +1,24 @@
 import { useEffect, useRef } from "react";
 import p5 from "p5";
-import * as Tone from 'tone'
+import { playRandomNote } from "../log/toneSetup";
 
-// This consists of the canvas where the code will run
 const P5canvas = () => {
   const canvasRef = useRef(null);
 
   useEffect(() => {
     const sketch = (p) => {
-
-      // creating synth for playing notes // 
-
-      let synth;
-
       p.setup = () => {
         p.createCanvas(600, 600).parent(canvasRef.current);
-
-        
-        // creating while intializer // 
-
-        synth = new Tone.Synth().toDestination();
-
       };
-      
 
       p.draw = () => {
         p.fill(255, 0, 0);
         p.ellipse(p.width / 2, p.height / 2, 50, 50);
-        // p.background(100)
       };
 
       p.mousePressed = () => {
-        const notes = ["C4", "D4", "E4", "F4", "G4", "A4", "B4"];
-      }
-
+        playRandomNote(); // called the function from the tone 
+      };
     };
 
     const myP5 = new p5(sketch, canvasRef.current);
