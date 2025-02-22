@@ -18,8 +18,11 @@ const P5canvas = () => {
       };
 
       p.mousePressed = () => {
-        playRandomNote(); // called the function from the tone
-        setPlayedNotes(getPlayedNotes()) ;
+
+        if(p.mouseX >= 0 && p.mouseX <= p.width && p.mouseY >= 0 && p.mouseY <= p.height){
+          playRandomNote(); // called the function from the tone
+          setPlayedNotes(getPlayedNotes()) ;
+        }
       };
     };
 
