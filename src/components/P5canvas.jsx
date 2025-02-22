@@ -1,9 +1,10 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import p5 from "p5";
-import { playRandomNote } from "../log/toneSetup.js";
+import { playRandomNote,getPlayedNotes } from "../log/toneSetup.js";
 
 const P5canvas = () => {
   const canvasRef = useRef(null);
+  const [playedNotes , setPlayedNotes] = useState([]);
 
   useEffect(() => {
     const sketch = (p) => {
@@ -17,7 +18,8 @@ const P5canvas = () => {
       };
 
       p.mousePressed = () => {
-        playRandomNote(); // called the function from the tone 
+        playRandomNote(); // called the function from the tone
+        setPlayedNotes(playRandomNote()) ;
       };
     };
 
@@ -31,6 +33,7 @@ const P5canvas = () => {
   return (
     <div style={{ width: "600px", height: "600px", border: "1px solid black" }}>
       <div ref={canvasRef}></div>
+      <h3>played notes</h3>
     </div>
   );
 };
