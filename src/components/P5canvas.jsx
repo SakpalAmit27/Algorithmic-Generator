@@ -1,6 +1,6 @@
 import { useEffect, useRef } from "react";
 import p5 from "p5";
-import { playRandomNote } from "../log/toneSetup";
+import { playRandomNote } from "../log/toneSetup.js";
 
 const P5canvas = () => {
   const canvasRef = useRef(null);
