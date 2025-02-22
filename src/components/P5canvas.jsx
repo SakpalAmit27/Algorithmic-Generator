@@ -15,12 +15,13 @@ const P5canvas = () => {
 
       p.setup = () => {
         p.createCanvas(600, 600).parent(canvasRef.current);
+
+        
+        // creating while intializer // 
+
+        synth = new Tone.Synth().toDestination();
+
       };
-
-      // creating while intializer // 
-
-      synth = new Tone.Synth().toDestination();
-
       
 
       p.draw = () => {
@@ -28,6 +29,10 @@ const P5canvas = () => {
         p.ellipse(p.width / 2, p.height / 2, 50, 50);
         // p.background(100)
       };
+
+      p.mousePressed = () => {
+        const notes = ["C4", "D4", "E4", "F4", "G4", "A4", "B4"];
+      }
 
     };
 
