@@ -3,6 +3,12 @@ import * as Tone from 'tone'
 import Stack from './Stack.js';
 
 
+
+// instanced the noteStack lol // 
+
+const noteStack = new Stack();
+
+
 const synth = new Tone.Synth().toDestination(); 
 
 
@@ -17,8 +23,9 @@ export const playRandomNote = () => {
 
   synth.triggerAttackRelease(randomNote,"8n");
 
+  noteStack.push(randomNote); 
 
-
+  console.log("stack  : ",noteStack.getStack());
   
 }
 
