@@ -1,5 +1,7 @@
 import * as Tone from 'tone'
 
+import Stack from './Stack.js';
+
 
 const synth = new Tone.Synth().toDestination(); 
 
@@ -14,6 +16,10 @@ export const playRandomNote = () => {
 
 
   synth.triggerAttackRelease(randomNote,"8n");
+
+
+
+  
 }
 
 
