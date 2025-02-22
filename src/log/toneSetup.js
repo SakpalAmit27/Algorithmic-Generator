@@ -29,4 +29,10 @@ export const playRandomNote = () => {
   
 }
 
+export const getPlayedNotes = () => {
+
+  return noteStack.getStack();
+}
+
+
 
