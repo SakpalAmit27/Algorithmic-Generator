@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
 import p5 from "p5";
 import { playRandomNote } from "../log/toneSetup.js";
+import { changeScale } from "../log/toneSetup.js";
 
 const P5canvas = () => {
   const canvasRef = useRef(null);
@@ -22,14 +23,13 @@ const P5canvas = () => {
         let radius = 200; // Distance from center @SakpalAmit27
 
         for (let i = 0; i < playedNotes.length; i++) {
-          let note = playedNotes[i] || "N/A"; // @SakpalAmit27 : trying to fix the notes // 
-
+          let note = playedNotes[i] || "N/A"; // @SakpalAmit27 : trying to fix the notes //
 
           let angle = p.TWO_PI * (i / playedNotes.length);
           let x = centerX + radius * p.cos(angle);
           let y = centerY + radius * p.sin(angle);
 
-          // Draw arrows pointer @SakpalAmit27 // 
+          // Draw arrows pointer @SakpalAmit27 //
           if (i > 0) {
             let prevAngle = p.TWO_PI * ((i - 1) / playedNotes.length);
             let prevX = centerX + radius * p.cos(prevAngle);
@@ -44,30 +44,34 @@ const P5canvas = () => {
           p.ellipse(x, y, 40, 40);
 
           // Draw note labels inside circles
-          p.fill(255); 
+          p.fill(255);
           p.textSize(20);
           p.textAlign(p.CENTER, p.CENTER);
-          p.text(String(note), x, y); 
+          p.text(String(note), x, y);
         }
       };
 
       p.mousePressed = async () => {
-        if (p.mouseX >= 0 && p.mouseX <= p.width && p.mouseY >= 0 && p.mouseY <= p.height) {
-          const newNote = await playRandomNote();  // note holder // 
+        if (
+          p.mouseX >= 0 &&
+          p.mouseX <= p.width &&
+          p.mouseY >= 0 &&
+          p.mouseY <= p.height
+        ) {
+          const newNote = await playRandomNote(); // note holder //
 
-          // debugging // 
+          // debugging //
 
-          console.log("new note : ",newNote);
+          console.log("new note : ", newNote);
 
-          if(typeof newNote === "string" && newNote.trim() !== ""){
-            playedNotes.push(newNote); 
+          if (typeof newNote === "string" && newNote.trim() !== "") {
+            playedNotes.push(newNote);
 
-            console.log("debug playedNotes : ",playedNotes)
-            p.redraw();  // implementd redraw to redraw the canvas cricle without the effect rendered /
-          }else{
-            console.log("playRandomNote() returned undefined")
+            console.log("debug playedNotes : ", playedNotes);
+            p.redraw(); // implementd redraw to redraw the canvas cricle without the effect rendered /
+          } else {
+            console.log("playRandomNote() returned undefined");
           }
-    
         }
       };
     };
@@ -79,10 +83,22 @@ const P5canvas = () => {
     };
   }, []);
 
+  const handleScaleChange = (e) => {
+    const newScale = e.target.value;
+
+    changeScale(newScale);
+    console.log(`scale trasmitted to : ${newScale}`);
+  };
+
   return (
     <div style={{ width: "600px", height: "600px", border: "1px solid black" }}>
       <div ref={canvasRef}></div>
-      <h3>Played Notes</h3>
+      <select onChange={handleScaleChange} defaultValue={"D Major"}>
+      <option value="C Major">C Major</option>
+      <option value="D Major">D Major</option>
+      <option value="A Minor">A Minor</option>
+      <option value="G Major">G Major</option>
+      </select>
     </div>
   );
 };
