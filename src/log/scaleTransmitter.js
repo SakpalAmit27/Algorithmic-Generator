@@ -14,7 +14,7 @@ class scaleTransmitter{
     this.currentSelectedScale = "D Major";
     }
 
-    
+
     // incase setting a newScale // 
 
     setScale(scaleName){
@@ -25,7 +25,28 @@ class scaleTransmitter{
             console.error(`scale : ${scaleName} not found !`);
         }
     }
+
+    //@SakpalAmit27 , get the current scale notes // 
+
+    getScaleNotes(){
+        return this.scales[this.currentSelectedScale] || [];
+    }
+
+  
+ 
+    // @SakpalAmit27 : getting random notes from the scale // 
+
+    getRandomNote(){
+        const scaleNotes = this.getScaleNotes(); 
+        return scaleNotes[Math.floor(Math.random() * scaleNotes.length)]
+    }
     
 
     
-}
+};
+
+//@SakpalAmit27 : created instance // 
+
+const scaleTransmit = new scaleTransmitter;
+
+export default scaleTransmit
