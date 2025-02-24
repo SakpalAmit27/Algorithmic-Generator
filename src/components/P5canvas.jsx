@@ -22,6 +22,9 @@ const P5canvas = () => {
         let radius = 200; // Distance from center @SakpalAmit27
 
         for (let i = 0; i < playedNotes.length; i++) {
+          let note = playedNotes[i] || "N/A"; // @SakpalAmit27 : trying to fix the notes // 
+
+
           let angle = p.TWO_PI * (i / playedNotes.length);
           let x = centerX + radius * p.cos(angle);
           let y = centerY + radius * p.sin(angle);
@@ -44,15 +47,27 @@ const P5canvas = () => {
           p.fill(0); 
           p.textSize(16);
           p.textAlign(p.CENTER, p.CENTER);
-          p.text(String(playedNotes[i]), x, y); 
+          p.text(String(note), x, y); 
         }
       };
 
-      p.mousePressed = () => {
+      p.mousePressed = async () => {
         if (p.mouseX >= 0 && p.mouseX <= p.width && p.mouseY >= 0 && p.mouseY <= p.height) {
-          const newNote = playRandomNote(); 
-          playedNotes.push(newNote); 
-          p.redraw();  // implementd redraw to redraw the canvas cricle without the effect rendered /
+          const newNote = await playRandomNote();  // note holder // 
+
+          // debugging // 
+
+          console.log("new note : ",newNote);
+
+          if(typeof newNote === "string" && newNote.trim() !== ""){
+            playedNotes.push(newNote); 
+
+            console.log("debug playedNotes : ",playedNotes)
+            p.redraw();  // implementd redraw to redraw the canvas cricle without the effect rendered /
+          }else{
+            console.log("playRandomNote() returned undefined")
+          }
+    
         }
       };
     };
