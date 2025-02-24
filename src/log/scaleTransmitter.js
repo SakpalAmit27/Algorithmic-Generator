@@ -10,7 +10,10 @@ class scaleTransmitter{
             "G Major": ["G4", "A4", "B4", "C4", "D4", "E4", "F#4"],
     }
 
-    this.currentScale = "D Major";
+    // @SakpalAmit27 - default selected scale will be Dmaj // 
+    this.defaultScale = "D Major"
+
     
+
     
 }
