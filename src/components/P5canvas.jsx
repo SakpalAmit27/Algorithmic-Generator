@@ -1,27 +1,58 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import p5 from "p5";
-import { playRandomNote,getPlayedNotes } from "../log/toneSetup.js";
+import { playRandomNote } from "../log/toneSetup.js";
 
 const P5canvas = () => {
   const canvasRef = useRef(null);
-  const [playedNotes , setPlayedNotes] = useState([]);
 
   useEffect(() => {
     const sketch = (p) => {
+      let playedNotes = []; // Store notes inside p5
+
       p.setup = () => {
         p.createCanvas(600, 600).parent(canvasRef.current);
+        p.noLoop(); // Prevent automatic looping
       };
 
       p.draw = () => {
-        p.fill(255, 0, 0);
-        p.ellipse(p.width / 2, p.height / 2, 50, 50);
+        p.background(100);
+
+        let centerX = p.width / 2;
+        let centerY = p.height / 2;
+        let radius = 200; // Distance from center @SakpalAmit27
+
+        for (let i = 0; i < playedNotes.length; i++) {
+          let angle = p.TWO_PI * (i / playedNotes.length);
+          let x = centerX + radius * p.cos(angle);
+          let y = centerY + radius * p.sin(angle);
+
+          // Draw arrows pointer @SakpalAmit27 // 
+          if (i > 0) {
+            let prevAngle = p.TWO_PI * ((i - 1) / playedNotes.length);
+            let prevX = centerX + radius * p.cos(prevAngle);
+            let prevY = centerY + radius * p.sin(prevAngle);
+
+            p.stroke(255);
+            p.line(prevX, prevY, x, y);
+          }
+
+          // Circle renderer .. @SakpalAmit27//
+          p.fill(255, 0, 0);
+          p.ellipse(x, y, 40, 40);
+
+          // Draw note labels inside circles
+          p.fill(0); 
+          p.textSize(16);
+          p.textAlign(p.CENTER, p.CENTER);
+          p.text(String(playedNotes[i]), x, y); 
+        }
       };
 
       p.mousePressed = () => {
-
-        if(p.mouseX >= 0 && p.mouseX <= p.width && p.mouseY >= 0 && p.mouseY <= p.height){
-          playRandomNote(); // called the function from the tone
-          setPlayedNotes(getPlayedNotes()) ;
+        if (p.mouseX >= 0 && p.mouseX <= p.width && p.mouseY >= 0 && p.mouseY <= p.height) {
+          const newNote = playRandomNote(); 
+          playedNotes.push(newNote); 
+          p.redraw();  // implementd redraw to redraw the canvas cricle without the effect rendered /
         }
       };
     };
@@ -36,8 +67,7 @@ const P5canvas = () => {
   return (
     <div style={{ width: "600px", height: "600px", border: "1px solid black" }}>
       <div ref={canvasRef}></div>
-      <h3>played notes</h3>
-      <p>{playedNotes.join(", ")}</p>
+      <h3>Played Notes</h3>
     </div>
   );
 };
