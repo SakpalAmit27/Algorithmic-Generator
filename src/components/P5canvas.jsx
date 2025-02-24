@@ -44,8 +44,8 @@ const P5canvas = () => {
           p.ellipse(x, y, 40, 40);
 
           // Draw note labels inside circles
-          p.fill(0); 
-          p.textSize(16);
+          p.fill(255); 
+          p.textSize(20);
           p.textAlign(p.CENTER, p.CENTER);
           p.text(String(note), x, y); 
         }
