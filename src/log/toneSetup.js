@@ -18,14 +18,20 @@ export const playRandomNote = () => {
         
   const notes = ["C4", "D4", "E4", "F4", "G4", "A4", "B4"];
 
-  const randomNote = notes[Math.floor(Math.random() * notes.length)]; 
+  const randomIndex = Math.floor(Math.random() * notes.length);
+  const selectedNote = notes[randomIndex]; // f @SakpalAmit27
+  
+  
 
 
-  synth.triggerAttackRelease(randomNote,"8n");
+  synth.triggerAttackRelease(selectedNote,"8n");
 
-  noteStack.push(randomNote); 
+  // noteStack.push(randomNote); 
 
-  console.log("stack  : ",noteStack.getStack());
+  console.log("selected note : ",selectedNote); 
+
+  return selectedNote;
+
   
 }
 
