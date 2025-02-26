@@ -20,7 +20,7 @@ class Stack{
     }
 
     peek(){
-        return this.container.length > 0 ? this.container[this.items.length - 1] : null; 
+        return this.container.length > 0 ? this.container[this.container.length - 1] : null; 
     }
 
     isEmpty(){
