@@ -14,12 +14,19 @@ const Canvas = ({noteStack}) => {
       };
 
       p.draw = () => {
-        p.background(100);
+        // Smooth gradient background
+        for (let y = 0; y < p.height; y++) {
+          let inter = p.map(y, 0, p.height, 0, 1);
+          let c = p.lerpColor(p.color(30, 30, 60), p.color(10, 10, 40), inter);
+          p.stroke(c);
+          p.line(0, y, p.width, y);
+        }
+
         let centerX = p.width / 2;
         let centerY = p.height / 2;
         let radius = 200;
 
-        const playedNotes = noteStack.getStack(); // fyi function for getting notes // 
+        const playedNotes = noteStack.getStack();
 
         for (let i = 0; i < playedNotes.length; i++) {
           let note = playedNotes[i] || "N/A";
@@ -31,12 +38,15 @@ const Canvas = ({noteStack}) => {
             let prevAngle = p.TWO_PI * ((i - 1) / playedNotes.length);
             let prevX = centerX + radius * p.cos(prevAngle);
             let prevY = centerY + radius * p.sin(prevAngle);
-            p.stroke(255);
+            p.stroke(255, 150);
+            p.strokeWeight(2);
             p.line(prevX, prevY, x, y);
           }
 
-          p.fill(255, 0, 0);
-          p.ellipse(x, y, 40, 40);
+          // Glowing note effect
+          p.noStroke();
+          p.fill(255, 100, 100, 180);
+          p.ellipse(x, y, 50, 50);
 
           p.fill(255);
           p.textSize(20);
