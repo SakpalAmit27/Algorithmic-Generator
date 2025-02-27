@@ -6,8 +6,7 @@ const App = () => {
       <div className="head">
          Algorithmic Dynamics
       </div>
-
-      <P5canvas/>
+      <center><P5canvas/></center>
     </div>
   )
 }
