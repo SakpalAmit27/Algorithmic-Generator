@@ -1,11 +1,11 @@
 import { useEffect, useRef } from "react";
 import { playRandomNote } from "../../log/toneSetup";
 import p5 from "p5";
-import Stack from "../../log/Stack.js"; // @SakpalAmit27 stack // 
 
-const Canvas = () => {
+
+const Canvas = ({noteStack}) => {
   const canvasRef = useRef(null);
-  const noteStack = new Stack();  // @SakpalAmit27 instance of stck // 
+  // const noteStack = new Stack();  // @SakpalAmit27 instance of stck // 
 
   useEffect(() => {
     const sketch = (p) => {
@@ -59,7 +59,7 @@ const Canvas = () => {
     const myP5 = new p5(sketch, canvasRef.current);
 
     return () => myP5.remove();
-  }, [playRandomNote]); 
+  }, [noteStack]); 
 
   return <div ref={canvasRef}></div>;
 };
